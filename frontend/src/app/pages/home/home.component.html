@@ -1,0 +1,27 @@
+
+<header>
+    <nav>
+      <a href="/">
+        <img src="/favicon.ico" alt="">
+      </a>
+      <ul>
+        <li>
+          <a href="/">Acceuil</a>
+        </li>
+        <li>
+          <a href="/">Produits</a>
+        </li>
+      </ul>
+    </nav>
+    <h1>Bienvenu sur le site qui vend de trucs avec des A dessus</h1>
+  
+  </header>
+  <main>
+    <section>
+      <aside>
+        <app-product-list #productList></app-product-list>
+      </aside>
+        <app-product-form  (productAdded)="productList.onProductAdded($event)"></app-product-form>
+    </section>
+  </main>
+  

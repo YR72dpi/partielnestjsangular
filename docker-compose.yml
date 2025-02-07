@@ -1,0 +1,53 @@
+name: "partiel-nestjs-angular"
+services:
+  postgres_database:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER}
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}"]
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_partiel_database:/var/lib/postgresql/data:rw
+    networks:
+      - partiel_network
+      
+  backend:
+    image: node:20
+    container_name: nestjs_api
+    networks:
+      - partiel_network
+    ports:
+      - "3000:3000"  # Expose le port
+    environment:
+      - NODE_ENV=prod
+      - DATABASE_URL=postgres://postgres:${POSTGRES_PASSWORD}@postgres_database:5432/${POSTGRES_DB}
+    command: sh -c "npm install && npm run start:dev"
+
+
+  frontend:
+    image: node:20
+    container_name: angularjs_app
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "4200:4200"
+    command: sh -c "npm install && npm start"
+    depends_on:
+      - backend
+    networks:
+      - partiel_network
+
+volumes:
+  postgres_partiel_database:
+
+networks:
+  partiel_network:
+    driver: bridge

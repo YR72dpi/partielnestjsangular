@@ -1,0 +1,38 @@
+
+<header>
+  <nav>
+    <a href="/">
+      <img src="/favicon.ico" alt="">
+    </a>
+    <ul>
+      <li>
+        <a href="/">Acceuil</a>
+      </li>
+      <li>
+        <a href="/">Produits</a>
+      </li>
+    </ul>
+  </nav>
+  <h1>Bienvenu sur le site qui vend de trucs avec des A dessus</h1>
+
+</header>
+
+<main>
+  <h2>Modifier un Produit</h2>
+
+<form [formGroup]="productForm" (ngSubmit)="updateProduct()">
+  <label>Nom</label>
+  <input type="text" formControlName="name" required />
+
+  <label>Description</label>
+  <textarea formControlName="description" required></textarea>
+
+  <label>Prix</label>
+  <input type="number" formControlName="price" required min="0" />
+ 
+  <label>Stock</label>
+  <input type="number" formControlName="stock" required min="0" />
+
+  <button type="submit">Modifier</button>
+</form>
+</main>

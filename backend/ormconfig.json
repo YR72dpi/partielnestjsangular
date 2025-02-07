@@ -1,0 +1,21 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "root",
+    "password": "partiel",
+    "database": "partiel",
+    "synchronize": false, 
+    "logging": true,
+    "entities": [
+      "dist/Entity/*.entity{.ts,.js}"
+    ],
+    "migrations": [
+      "src/migrations/*.ts"
+    ],
+    "subscribers": [],
+    "cli": {
+      "migrationsDir": "src/migrations"
+    }
+  }
+  

@@ -1,0 +1,19 @@
+
+
+<form [formGroup]="productForm" (ngSubmit)="addProduct()">
+  <h3>Ajouter</h3>
+  <label>Nom :</label>
+  <input formControlName="name" />
+
+  <label>Description :</label>
+  <input formControlName="description" />
+
+  <label>Prix :</label>
+  <input type="number" formControlName="price" />
+
+  <label>Stock :</label>
+  <input type="number" formControlName="stock" />
+
+  <button type="submit" [disabled]="productForm.invalid">Ajouter</button>
+</form>
+  
